@@ -22,7 +22,7 @@ end
 get_the_email_of_a_townhal_from_its_webpage
 
 
-def get_all_the_urls_of_val_doise_townhalls(url)
+def get_all_the_urls_of_val_doise_townhalls
 
   page = Nokogiri::HTML(open("http://annuaire-des-mairies.com/val-d-oise.html"))
 	news_url = page.css(".lientxt")
@@ -35,15 +35,12 @@ def get_all_the_urls_of_val_doise_townhalls(url)
   end
 end
 
-get_all_the_urls_of_val_doise_townhalls
-
-
 
 
 def on_est_bon
 get_all_the_urls_of_val_doise_townhalls
 
-   LIST.each do |page|
+  LIST.each do |page|
 
    url = Nokogiri::HTML(open(page))
    url.xpath('//tr/td/p').each do |email_g|
@@ -60,38 +57,18 @@ get_all_the_urls_of_val_doise_townhalls
 end
 
 on_est_bon
+  
+ def rangement
+    
+    @mairies = {}
 
+      @mairies[@name] = Hash.new()  #parent
+      @mairies[@name]["adresse:"] = @name #enfant
+      @mairies[@name]["e:"] = @good #enfant
 
-=begin
-
-
-
-def scrap_all (url)
-get_all_the_urls_of_val_doise_townhalls(url)
-on_est_bon
-end
- scrap_all
-
-
-def  rangement
-@mairies = {}
-
-@mairies[@name] = Hash.new() #parent
-@mairies[@name]["adresse:"] = @name #enfant
-@mairies[@name]["e:"] = @good #enfant
-=begin
-@mairies.each do |adresse, good|
-puts adresse + " " + good
-
-puts @mairies[@name]
+puts @mairies
 end
 
-#rangement 
+rangement
 
 
-=begin
-@mairies[@name].each do |:adresse, :e|
-puts adresse + " " + e
-=end
-#.each do |adresse, e|
-#puts adresse + " " + e
